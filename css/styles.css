@@ -106,30 +106,68 @@ nav h1 a {
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   width: 100%;
-  height: 90px;
   background-color: #3397DB;
   align-items: center;
 }
 
 /* acount for small viewport size*/
-@media screen and (max-width:460px){
+@media screen and (max-width:475px){
   .filter-options{
-    height: 110px;
-    padding: 20px 90px 30px 90px;
+    height: 150px;
+  }
+
+  .filter-options h2{
+    padding-top:20px;
+    margin-left:30px;
+  }
+
+  .filter-options #neighborhoods-select{
+    margin: 0px 90px 10px 90px;
+  }
+
+  .filter-options #cuisines-select{
+    margin: 0px 90px 30px 90px;
   }
 }
 
 /*account for medium viewport size*/
-@media screen and (min-width:461px) and (max-width:564px){
-  .filter-options{
-    padding: 20px 0px 0px 1vw;
+@media screen and (min-width:476px) and (max-width:610px){
+  .filter-options {
+    height: 100px;
   }
+
+  .filter-options h2{
+    padding-top: 20px;
+    margin:0 0 0 10vw;
+  }
+  
+  .filter-options #neighborhoods-select{
+    margin: 0px 0px 10px 10vw;
+  }
+
+  .filter-options #cuisines-select{
+    margin: 10px 0px 0px 5px;
+  }
+
 }
 
 /*account for large viewport size*/
-@media screen and (min-width:565px){
-  .filter-options{
-    padding: 20px 0px 0px 20vw;
+@media screen and (min-width:611px){
+  .filter-options {
+    height: 100px;
+  }
+
+  .filter-options h2{
+    padding-top: 20px;
+    margin:0 0 0 30vw;
+  }
+  
+  .filter-options #neighborhoods-select{
+    margin: 0px 0px 10px 30vw;
+  }
+
+  .filter-options #cuisines-select{
+    margin: 10px 0px 0px 5px;
   }
 }
 
@@ -138,7 +176,6 @@ nav h1 a {
   font-size: 1rem;
   font-weight: normal;
   line-height: 1;
-  margin: 0 20px;
 }
 .filter-options select {
   background-color: white;
@@ -147,7 +184,6 @@ nav h1 a {
   font-size: 11pt;
   height: 35px;
   letter-spacing: 0;
-  margin: 10px;
   padding: 0 10px;
   width: 200px;
 }
