@@ -109,17 +109,27 @@ nav h1 a {
   height: 90px;
   background-color: #3397DB;
   align-items: center;
-  padding: 20px;
 }
 
 /* acount for small viewport size*/
-@media screen and (min-width:460px){
+@media screen and (max-width:460px){
   .filter-options{
-    width: 100%;
     height: 110px;
-    background-color: #3397DB;
-    align-items: center;
-    padding: 20px;
+    padding: 20px 90px 30px 90px;
+  }
+}
+
+/*account for medium viewport size*/
+@media screen and (min-width:461px) and (max-width:564px){
+  .filter-options{
+    padding: 20px 0px 0px 1vw;
+  }
+}
+
+/*account for large viewport size*/
+@media screen and (min-width:565px){
+  .filter-options{
+    padding: 20px 0px 0px 20vw;
   }
 }
 
