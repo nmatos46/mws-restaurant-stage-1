@@ -113,7 +113,7 @@ nav h1 a {
 }
 
 /* acount for small viewport size*/
-@media and (min-width:460px){
+@media screen and (min-width:460px){
   .filter-options{
     width: 100%;
     height: 110px;
