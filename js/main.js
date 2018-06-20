@@ -15,9 +15,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 /**Register the service worker once main.js is called.*/
 if (navigator.serviceWorker){
   navigator.serviceWorker
-  .register('js/sw.js')
+  .register('sw.js')
   .then(function(registration){
     console.log("I'm alive!!!!!", registration);
+    updateRestaurants();
   })
   .catch(function(err){
     console.log("I am dead!!!!", err);
@@ -92,13 +93,14 @@ window.initMap = () => {
     center: loc,
     scrollwheel: false
   });
-  updateRestaurants();
+  
 }
 
 /**
  * Update page and map for current restaurants.
  */
 updateRestaurants = () => {
+  console.log("Am I running?????????????")
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
 
