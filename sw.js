@@ -14,19 +14,14 @@ for (let i=1; i<=10; i++){
     cacheAlways.push(`./imgSmall/${i}.jpg`);
     cacheAlways.push(`./imgMedium/${i}.jpg`);
     cacheAlways.push(`./img/${i}.jpg`);
-
-    //cacheAlways.push(`./restuarant.html?id=${i}`);
 }
 
-let currentCache = 'myCacheNow6';
+let currentCache = 'myCacheNow';
 
 self.addEventListener("install", inst => {
-    console.log("I have INSTALLED!!!!");
-    console.log(cacheAlways);
     //Install predetermined caches before full install
     inst.waitUntil(
         caches.open(currentCache).then(maCache => {
-            console.log("Adding a cache!!!!");
             return maCache.addAll(cacheAlways);
         })
     );
@@ -34,16 +29,12 @@ self.addEventListener("install", inst => {
 })
 
 self.addEventListener("activate", actEv =>{
-    console.log("I am ACTIVATED!!!!!");
-    
     actEv.waitUntil(
         caches.keys().then(cacheArray=>{
             return Promise.all(
                 cacheArray.filter(cacheOfThePast=>{
-                    console.log("Filtering caches!!!!")
                     return cacheOfThePast!==currentCache;
                 }).map(targetAcquired => {
-                    console.log('Deleting old caches!!!!');
                     return caches.delete(targetAcquired);
                 })
             )
@@ -59,18 +50,38 @@ self.addEventListener("fetch", fetEv => {
     
 
     fetEv.respondWith(
-        caches.match(fetEv.request).then(response=>{
+        caches.match(fetEv.request).then(response => {
+            
             if (response){
-                console.log("OMG...I\'M DOING IT!!!!! The cache WORKS!!!");
                 return response;
             }
-            console.log(fetEv.request.url);
-            console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-            console.log(fetEv.request);
-            return fetch(fetEv.request);
+            
+            //record the request url because the request is consumed when fetching
+            var reqURL = fetEv.request.url;
+        
+            return fetch(fetEv.request).then( fetResponse =>{
+
+                //cache responses that are not related to google maps
+                if (!(reqURL.includes("maps") || reqURL.includes("googleapis"))){
+
+                    //clone the response to not consume it when caching
+                    var fetResClone = fetResponse.clone();
+
+                    //cache the url-response pair
+                    caches.open(currentCache).then(cacheNow =>{
+                        cacheNow.put(reqURL,fetResClone);
+                    });
+                }
+                return fetResponse;
+            })
         })
         .catch( (err) => {
-            return new Response(err);
+            return new Response(
+                `
+                ${err}
+                Please visit this page while online
+                before trying to visit it offline.
+                `);
         })
         
     );
