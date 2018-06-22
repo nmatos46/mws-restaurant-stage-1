@@ -16,7 +16,7 @@ for (let i=1; i<=10; i++){
     cacheAlways.push(`./img/${i}.jpg`);
 }
 
-let currentCache = 'myCacheNow';
+let currentCache = 'myCacheNow0';
 
 self.addEventListener("install", inst => {
     //Install predetermined caches before full install
@@ -57,7 +57,7 @@ self.addEventListener("fetch", fetEv => {
             }
             
             //record the request url because the request is consumed when fetching
-            var reqURL = fetEv.request.url;
+            let reqURL = fetEv.request.url;
         
             return fetch(fetEv.request).then( fetResponse =>{
 
@@ -65,7 +65,7 @@ self.addEventListener("fetch", fetEv => {
                 if (!(reqURL.includes("maps") || reqURL.includes("googleapis"))){
 
                     //clone the response to not consume it when caching
-                    var fetResClone = fetResponse.clone();
+                    let fetResClone = fetResponse.clone();
 
                     //cache the url-response pair
                     caches.open(currentCache).then(cacheNow =>{
