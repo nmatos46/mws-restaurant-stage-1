@@ -10,6 +10,7 @@ var markers = []
 document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
+  updateRestaurants();
 });
 
 /**Register the service worker once main.js is called.*/
@@ -18,7 +19,6 @@ if (navigator.serviceWorker){
   .register('sw.js')
   .then(function(registration){
     console.log("I'm alive!!!!!", registration);
-    updateRestaurants();
   })
   .catch(function(err){
     console.log("I am dead!!!!", err);
