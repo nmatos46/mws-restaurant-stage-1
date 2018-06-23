@@ -1,7 +1,7 @@
 /************************** Citations ************************* */
 
 /*########## Responsive Styling
-  Applies to main.js, styles.css
+  Applies to the following files: ./js/main.js, ./CSS/styles.css
 
   1. Personal Notes taken from Mobile Web Specialist Nanodegree
   https://docs.google.com/document/d/1EvYwhGkghX4f8XirF8ilWtzaE0MDjl8beXdkJCKxZ04/edit?usp=sharing
@@ -13,7 +13,7 @@
 
 
 //############# Service Worker Code
-//Applies to the following files: main.js, sw.js
+//Applies to the following files: ./js/main.js, ./sw.js
 /**
  * 1.Service Workers, An introduction 
  *   https://developers.google.com/web/fundamentals/primers/service-workers/
