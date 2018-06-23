@@ -13,17 +13,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
   updateRestaurants();
 });
 
+/**Citations: Service Worker Code 2,
+ *            Heading "Registering the service worker"
+ * Notes:
+ * - Register the service worker with the name of the
+ *   service worker script. 
+ * - Promise to log to console using then for debugging
+ */
+
 /**Register the service worker once main.js is called.*/
 if (navigator.serviceWorker){
-  navigator.serviceWorker
-  .register('sw.js')
-  .then(function(registration){
+  navigator.serviceWorker.register('sw.js').then(registration => {
     console.log("I'm alive!!!!!", registration);
   })
   .catch(function(err){
     console.log("I am dead!!!!", err);
   });
 }
+/**End of Citations: Service Worker Code 2,
+ *            Heading "Registering the service worker"
+ */
 
 /**
  * Fetch all neighborhoods and set their HTML.
@@ -154,9 +163,20 @@ createRestaurantHTML = (restaurant) => {
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
+  
+  /**Citations: Responsive Styling, 1
+   *            Heading "Full Responsiveness"
+   * Notes:
+   * - Add srcset attribute to provide images of differing
+   *   pixel sizing.
+   */
   image.src = `/imgSmall/${restaurant.photograph}`;
   image.srcset = `/img/${restaurant.photograph} 1200w, /imgMedium/${restaurant.photograph} 800w, /imgSmall/${restaurant.photograph} 400w`;
   image.alt = restaurant.alt_text;
+  /*****End of Citations: Responsive Styling, 1
+   *                      Heading "Full Responsiveness"
+   */
+  
   li.append(image);
   
   const name = document.createElement('h1');

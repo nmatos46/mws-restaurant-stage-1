@@ -1,3 +1,7 @@
+/**Citations: Service Worker Code 1, 
+ *            Heading "Install a service worker"
+ *Notes: Use array variables to initialize a cache
+ */
 let cacheAlways = [
     './',
     './index.html',
@@ -8,7 +12,9 @@ let cacheAlways = [
     './js/dbhelper.js',
     './data/restaurants.json'
 ];
-
+/**End of "Citations: Service Worker Code 1,
+ *                    Heading "Install a service worker""
+ */
 //Add images and restaurant pages to the cache
 for (let i=1; i<=10; i++){
     cacheAlways.push(`./imgSmall/${i}.jpg`);
@@ -16,6 +22,19 @@ for (let i=1; i<=10; i++){
     cacheAlways.push(`./img/${i}.jpg`);
 }
 
+/**Citations: Service Worker Code 2, Heading "Using the cache API"
+ * Notes: 
+ * - When installing service worker, pause install event using waituntil
+ *   and when adding a cache, return a promise to add to the cache using then
+ * - When the service worker is activating, pause activate event using waituntil
+ *   and when deleting a cache, return a promise for all caches to be deleted
+ *   using promise.all
+ * - When the browser initiates a fetch event, intercept it using respondWith,
+ *   returning a promise for a response from the cache using then, returning 
+ *   a promise for caching the fetched response using then if it doesn't exist 
+ *   in the cache and returning a new response with a string if an error is 
+ *   thrown.
+ */
 let currentCache = 'myCacheNow0';
 
 self.addEventListener("install", inst => {
@@ -56,6 +75,15 @@ self.addEventListener("fetch", fetEv => {
                 return response;
             }
             
+            /**Citations: Service Worker Code 1, 
+             *            Heading "Cache and return requests" 
+             * Notes: 
+             * - Requests and responses are streams that are
+             *   consumed when fetched or put into the cache.
+             *   Clone or record before consuming if you 
+             *   need either later in your code.
+             */
+
             //record the request url because the request is consumed when fetching
             let reqURL = fetEv.request.url;
         
@@ -66,6 +94,10 @@ self.addEventListener("fetch", fetEv => {
 
                     //clone the response to not consume it when caching
                     let fetResClone = fetResponse.clone();
+            
+            /*****End of Citations: Service Worker Code 1, 
+             *                      Heading "Cache and return requests"
+             */
 
                     //cache the url-response pair
                     caches.open(currentCache).then(cacheNow =>{
@@ -85,4 +117,7 @@ self.addEventListener("fetch", fetEv => {
         })
         
     );
+/*****End of Citations: Service Worker Code 2, 
+ * Heading "Using the cache API"
+ */
 })

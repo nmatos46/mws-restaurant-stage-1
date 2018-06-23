@@ -20,12 +20,19 @@ ul, li {
 	font-size: 10pt;
 	color: #333;
 }
+
+/*Citations: Responsive Stlying, 2
+Notes:
+- Use display, flex-direction, flex-wrap, and justify-content
+  attributes for responsive containers
+*/
 ul{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
 }
+/*End of Citations:  Responsive Stlying, 2*/
 a {
 	color: orange;
 	text-decoration: none;
