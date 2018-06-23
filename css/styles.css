@@ -21,7 +21,7 @@ ul, li {
 	color: #333;
 }
 
-/*Citations: Responsive Stlying, 2
+/******Citations: Responsive Stlying, 2
 Notes:
 - Use display, flex-direction, flex-wrap, and justify-content
   attributes for responsive containers
@@ -32,7 +32,7 @@ ul{
   flex-wrap: wrap;
   justify-content: space-around;
 }
-/*End of Citations:  Responsive Stlying, 2*/
+/******End of Citations:  Responsive Stlying, 2*/
 a {
 	color: orange;
 	text-decoration: none;
@@ -67,6 +67,16 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   text-align: center;
   text-transform: uppercase;
 }
+
+/******Citations: Responsive Styling, 1
+                  Headings "Starting Small" and "Building Up"
+Notes: 
+- Use % for width and height attributes to fill viewport
+- Use media queries for moving with changing viewport sizes
+- Use auto for margins to adjust position of containers with max sizes  
+  to viewport width and height
+*/
+
 /* ====================== Navigation ====================== */
 nav {
   width: 100%;
@@ -319,6 +329,9 @@ nav h1 a {
   text-transform: uppercase;
 	width: 100%;
 }
+/******End of Citations: Responsive Styling, 1
+                  Headings "Starting Small" and "Building Up"
+*/
 #restaurant-container, #reviews-container {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;

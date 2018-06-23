@@ -163,6 +163,7 @@ createRestaurantHTML = (restaurant) => {
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
+  image.src = `/imgSmall/${restaurant.photograph}`;
   
   /**Citations: Responsive Styling, 1
    *            Heading "Full Responsiveness"
@@ -170,13 +171,13 @@ createRestaurantHTML = (restaurant) => {
    * - Add srcset attribute to provide images of differing
    *   pixel sizing.
    */
-  image.src = `/imgSmall/${restaurant.photograph}`;
   image.srcset = `/img/${restaurant.photograph} 1200w, /imgMedium/${restaurant.photograph} 800w, /imgSmall/${restaurant.photograph} 400w`;
-  image.alt = restaurant.alt_text;
   /*****End of Citations: Responsive Styling, 1
    *                      Heading "Full Responsiveness"
    */
   
+  //Add accessbility friendly images
+  image.alt = restaurant.alt_text;
   li.append(image);
   
   const name = document.createElement('h1');
@@ -192,7 +193,8 @@ createRestaurantHTML = (restaurant) => {
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
   li.append(address);
-
+  
+  //Add Accessibility friendly buttons
   const more = document.createElement('button');
   more.innerHTML = `See ${restaurant.name} Details`;
   more.addEventListener("click", () => {
