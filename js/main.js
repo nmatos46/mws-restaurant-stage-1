@@ -13,27 +13,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   updateRestaurants();
 });
 
-/**Citations: Service Worker Code 2,
- *            Heading "Registering the service worker"
- * Notes:
- * - Register the service worker with the name of the
- *   service worker script. 
- * - Promise to log to console using then for debugging
- */
-
-/**Register the service worker once main.js is called.*/
-if (navigator.serviceWorker){
-  navigator.serviceWorker.register('sw.js').then(registration => {
-    console.log("I'm alive!!!!!", registration);
-  })
-  .catch(function(err){
-    console.log("I am dead!!!!", err);
-  });
-}
-/**End of Citations: Service Worker Code 2,
- *            Heading "Registering the service worker"
- */
-
 /**
  * Fetch all neighborhoods and set their HTML.
  */
@@ -97,11 +76,13 @@ window.initMap = () => {
     lat: 40.722216,
     lng: -73.987501
   };
+  console.log("$$$$$$$$$$$$$Defining the map$$$$$$$$$$$$$$$$");
   self.map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: loc,
     scrollwheel: false
   });
+  console.log(self.map);
   
 }
 
@@ -152,6 +133,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     ul.append(createRestaurantHTML(restaurant));
   });
+  console.log("@@@@@@@@@@@@@@@@@@@@@@ Adding markers to map @@@@@@@@@@@@@@");
   addMarkersToMap();
 }
 

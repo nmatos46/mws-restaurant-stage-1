@@ -21,4 +21,9 @@
  * 2.Personal Notes taken from Udacity's Offline Web Applications course 
  *   Course: https://www.udacity.com/course/offline-web-applications--ud899
  *   Notes: https://docs.google.com/document/d/1oiHLZG_LrpxAzIHCLVSf5I8Qk06LKbHl6-zJcvyQ9sY/edit?usp=sharing
+ * 
+ * 3.Suggestion from peer of slack ID "Scott (MWS)"
+ *   6/24/2018
+ *   "Hey Norman, I don't see an equivalent of "js/mainController.js" 
+      (which should do the actual registration of your sw.js)"
  */

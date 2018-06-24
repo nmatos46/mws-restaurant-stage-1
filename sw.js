@@ -35,7 +35,7 @@ for (let i=1; i<=10; i++){
  *   in the cache and returning a new response with a string if an error is 
  *   thrown.
  */
-let currentCache = 'myCacheNow0';
+let currentCache = 'myCacheNow0234';
 
 self.addEventListener("install", inst => {
     //Install predetermined caches before full install
@@ -64,8 +64,8 @@ self.addEventListener("activate", actEv =>{
 
 self.addEventListener("fetch", fetEv => {
     //respond to fetch events with the cache
-    console.log(fetEv.request.url);
-    console.log(fetEv);
+    //console.log(fetEv.request.url);
+    //console.log(fetEv);
     
 
     fetEv.respondWith(
