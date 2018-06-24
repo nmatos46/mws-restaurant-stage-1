@@ -35,7 +35,7 @@ for (let i=1; i<=10; i++){
  *   in the cache and returning a new response with a string if an error is 
  *   thrown.
  */
-let currentCache = 'myCacheNow0234';
+let currentCache = 'myCacheNow';
 
 self.addEventListener("install", inst => {
     //Install predetermined caches before full install

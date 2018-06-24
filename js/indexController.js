@@ -18,11 +18,9 @@
 
 /**Register the service worker once main.js is called.*/
 if (navigator.serviceWorker){
-    navigator.serviceWorker.register('sw.js').then(registration => {
-      console.log("I'm alive!!!!!", registration);
-    })
-    .catch(function(err){
-      console.log("I am dead!!!!", err);
+    navigator.serviceWorker.register('sw.js')
+    .catch(err => {
+      console.log("Service Worker: C'est mort!!!!", err);
     });
   }
   /**End of Citations: Service Worker Code 2,

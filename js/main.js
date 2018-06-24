@@ -76,21 +76,20 @@ window.initMap = () => {
     lat: 40.722216,
     lng: -73.987501
   };
-  console.log("$$$$$$$$$$$$$Defining the map$$$$$$$$$$$$$$$$");
+  
   self.map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: loc,
     scrollwheel: false
   });
-  console.log(self.map);
-  
+
+  addMarkersToMap();
 }
 
 /**
  * Update page and map for current restaurants.
  */
 updateRestaurants = () => {
-  console.log("Am I running?????????????")
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
 
@@ -133,8 +132,13 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     ul.append(createRestaurantHTML(restaurant));
   });
-  console.log("@@@@@@@@@@@@@@@@@@@@@@ Adding markers to map @@@@@@@@@@@@@@");
-  addMarkersToMap();
+  
+  if (self.map){
+    /**only run if window.initMap has already been run
+     * and thus self.map is defined
+    */
+    addMarkersToMap();
+  }
 }
 
 /**
