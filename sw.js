@@ -63,11 +63,7 @@ self.addEventListener("activate", actEv =>{
 });
 
 self.addEventListener("fetch", fetEv => {
-    //respond to fetch events with the cache
-    //console.log(fetEv.request.url);
-    //console.log(fetEv);
     
-
     fetEv.respondWith(
         caches.match(fetEv.request).then(response => {
             
