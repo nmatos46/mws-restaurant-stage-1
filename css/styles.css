@@ -243,7 +243,10 @@ nav h1 a {
   min-height: 220px;
   min-width: 100%;
 }
-#restaurants-list li h1 {
+
+/*Citations: Accessibility HTML, 2.2*/
+#restaurants-list li h2 {
+/*End of Citations: Accessibility HTML, 2.2*/  
   color: #f18200;
   font-family: Arial,sans-serif;
   font-size: 14pt;

@@ -11,6 +11,27 @@
 
 */
 
+<!--################## Accessibility HTML -->
+<!--
+1. Code Review: index.html
+"Please add appropriate aria role and aria-label for this map container.
+<div id="map" aria-label="location" role="application">"
+External Resources:
+    https://www.w3.org/TR/wai-aria-practices-1.1/
+    https://www.w3.org/TR/html-aria/
+    http://karlgroves-sandbox.com/CheatSheets/ARIA-Cheatsheet.html
+2. Code Review: restaurant.html
+  2.1 "The <ul> that is the breadcrumb needs to have the appropriate aria structure
+       <ul id="breadcrumb" role="navigation" aria-label="Breadcrumb">"
+      External Resources:
+      https://www.w3.org/TR/wai-aria-practices/examples/breadcrumb/index.html
+  2.2 "You're using h1 as the title Restaurant Reviews , you should use lower 
+       tags (h2, h3, ...) for the Restaurant Name"
+
+
+
+-->
+
 
 //############# Service Worker Code
 //Applies to the following files: ./js/main.js, ./sw.js
