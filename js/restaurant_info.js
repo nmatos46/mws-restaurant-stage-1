@@ -35,20 +35,15 @@ fetchRestaurantFromURL = (callback) => {
       }
       fillRestaurantHTML();
       callback(null, restaurant)
-
-      /**
-      * Initialize Google map, called from HTML.
-      */
-      window.initMap = () => {
-        self.map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 16,
-          center: restaurant.latlng,
-          scrollwheel: false
-        });
-        DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
-      }
     });
   }
+}
+
+/**
+* Initialize Google map, called from HTML.
+*/
+window.initMap = () => {
+  self.map = new google.maps.Map(document.getElementById('map'));
 }
 
 /**
@@ -88,6 +83,14 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   }
   // fill reviews
   fillReviewsHTML();
+
+  //configure the google map
+  self.map.setOptions({
+    zoom: 16,
+    center: restaurant.latlng,
+    scrollwheel: false
+  });
+  DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
 }
 
 /**

@@ -9,8 +9,7 @@ let cacheAlways = [
     './css/styles.css',
     './js/main.js',
     './js/restaurant_info.js',
-    './js/dbhelper.js',
-    './data/restaurants.json'
+    './js/dbhelper.js'
 ];
 /**End of "Citations: Service Worker Code 1,
  *                    Heading "Install a service worker""
