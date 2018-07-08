@@ -63,7 +63,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img';
-  image.src = `/imgSmall/${restaurant.photograph}`; 
+  image.src = `/imgSmall/${restaurant.id}.jpg`; 
 
    /**Citations: Responsive Styling, 1
    *            Heading "Full Responsiveness"
@@ -71,7 +71,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
    * - Add srcset attribute to provide images of differing
    *   pixel sizing.
    */
-  image.srcset = `/img/${restaurant.photograph} 1200w, /imgMedium/${restaurant.photograph} 800w, /imgSmall/${restaurant.photograph} 400w`;
+  image.srcset = `/img/${restaurant.id}.jpg 1200w, /imgMedium/${restaurant.id}.jpg 800w, /imgSmall/${restaurant.id}.jpg 400w`;
   /*****End of Citations: Responsive Styling, 1
    *                      Heading "Full Responsiveness"
    */
