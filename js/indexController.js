@@ -27,4 +27,17 @@ if (navigator.serviceWorker){
 /**End of Citations: Service Worker Code 2,
  *            Heading "Registering the service worker"
  */
+
+/**Citations: Service Worker Code 2,
+ *            Heading "Indexed DB API"
+ */
+
+var dbPromise = idb.open('test-db', 1, function(upgradeDb) {
+  var keyValStore = upgradeDb.createObjectStore('keyval');
+  keyValStore.put("world", "hello");
+});
+
+/**End of Citations: Service Worker Code 2,
+ *                   Heading "Indexed DB API"
+ */
   
