@@ -5,6 +5,21 @@ var map;
  * Fill in restaurant html after DOM has loaded
  */
 document.addEventListener('DOMContentLoaded', event => {
+  /**
+  * Initialize Google map, called from HTML.
+  */
+  window.initMap = () => {
+    self.map = new google.maps.Map(document.getElementById('map'));
+    if (self.restaurant){
+      self.map.setOptions({
+        zoom: 16,
+        center: self.restaurant.latlng,
+        scrollwheel: false
+      });
+      DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+    }
+  }
+
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) { // Got an error!
       console.error(error);
@@ -39,12 +54,6 @@ fetchRestaurantFromURL = (callback) => {
   }
 }
 
-/**
-* Initialize Google map, called from HTML.
-*/
-window.initMap = () => {
-  self.map = new google.maps.Map(document.getElementById('map'));
-}
 
 /**
  * Create restaurant HTML and add it to the webpage
@@ -83,14 +92,17 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   }
   // fill reviews
   fillReviewsHTML();
-
+  
   //configure the google map
-  self.map.setOptions({
-    zoom: 16,
-    center: restaurant.latlng,
-    scrollwheel: false
-  });
-  DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+  if (self.map){
+    self.map.setOptions({
+      zoom: 16,
+      center: restaurant.latlng,
+      scrollwheel: false
+    });
+    DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+  }
+  
 }
 
 /**

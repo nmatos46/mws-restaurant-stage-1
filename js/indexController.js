@@ -32,9 +32,8 @@ if (navigator.serviceWorker){
  *            Heading "Indexed DB API"
  */
 
-var dbPromise = idb.open('test-db', 1, function(upgradeDb) {
-  var keyValStore = upgradeDb.createObjectStore('keyval');
-  keyValStore.put("world", "hello");
+restrDBPromise = idb.open('restrDB', 1, function(updateDB) {
+  updateDB.createObjectStore('restaurants', {keyPath: 'id'});
 });
 
 /**End of Citations: Service Worker Code 2,

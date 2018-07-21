@@ -134,6 +134,13 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   const ul = document.getElementById('restaurants-list');
   restaurants.forEach(restaurant => {
     ul.append(createRestaurantHTML(restaurant));
+
+    //Update IDB with restaurant objects
+    restrDBPromise.then( updateDB => {
+      var restrTX = updateDB.transaction('restaurants','readwrite');
+      var restStore = restrTX.objectStore('restaurants');
+      restStore.put(restaurant);
+    });
   });
   
   if (self.map){
