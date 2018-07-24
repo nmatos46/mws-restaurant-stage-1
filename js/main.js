@@ -135,14 +135,18 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     ul.append(createRestaurantHTML(restaurant));
 
-    //Update IDB with restaurant objects
-    restrDBPromise.then( updateDB => {
+    //Initialize IDB with restaurant objects
+    console.log('sdfafawrgeafgergaergar');
+    console.log(idb.open('restrDB'));
+    var restrDBPromise = idb.open('restrDB').then( updateDB => {
       var restrTX = updateDB.transaction('restaurants','readwrite');
       var restStore = restrTX.objectStore('restaurants');
       restStore.put(restaurant);
     });
+    console.log('^^^^^^^^^^^^^^^^^^^');
+    console.log(idb.open('restrDB'));
   });
-  
+
   if (self.map){
     /**only run if window.initMap has already been run
      * and thus self.map is defined

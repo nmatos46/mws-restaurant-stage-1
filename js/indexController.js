@@ -32,7 +32,7 @@ if (navigator.serviceWorker){
  *            Heading "Indexed DB API"
  */
 
-restrDBPromise = idb.open('restrDB', 1, function(updateDB) {
+var restrDBPromise = idb.open('restrDB', 1, function(updateDB) {
   updateDB.createObjectStore('restaurants', {keyPath: 'id'});
 });
 

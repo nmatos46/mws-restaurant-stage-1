@@ -84,8 +84,8 @@ self.addEventListener("fetch", fetEv => {
         
             return fetch(fetEv.request).then( fetResponse =>{
 
-                //cache responses that are not related to google maps
-                if (!(reqURL.includes("maps") || reqURL.includes("googleapis"))){
+                //cache responses that are not related to google maps, or the restaurants database
+                if (!(reqURL.includes("maps") || reqURL.includes("googleapis") || reqURL.includes("restaurants"))){
 
                     //clone the response to not consume it when caching
                     let fetResClone = fetResponse.clone();

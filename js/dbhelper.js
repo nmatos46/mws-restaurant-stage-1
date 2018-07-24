@@ -19,11 +19,45 @@ class DBHelper {
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
+    let restaurants = {};
+    
+    //fetch restaurants from idb
+    var restrDBPromise = idb.open('restrDB').then( updateDB => {
+      var restrTX = updateDB.transaction('restaurants');
+      var restStore = restrTX.objectStore('restaurants');
+      var restaurantsDB = restStore.getAll();
+      console.log("@@@@@@@@@@@@@@@");
+      console.log(restaurants);
+      return restaurantsDB;
+    }).then(objects =>{
+      console.log("$$$$$$$$$$$$$$$$$$$");
+      console.log(restaurants);
+      console.log(objects);
+      if (restaurants.length != 10){
+        console.log("THIS IS UNNECESSARY!!!");
+        console.log(restaurants);
+        restaurants = objects;
+        callback(null, restaurants);
+      }
+      
+    });
+    console.log("!!!!!!!!!!!!!!!");
+    console.log(restaurants);
+    
+    //fetch restaurants from server
     let xhr = new XMLHttpRequest();
     xhr.open('GET', DBHelper.DATABASE_URL);
     xhr.onload = () => {
       if (xhr.status === 200) { // Got a success response from server!
-        const restaurants = JSON.parse(xhr.responseText);
+        
+        if (restaurants.length != 10){
+          console.log(`***********************`);
+          restaurants = JSON.parse(xhr.responseText);
+          console.log(restaurants);
+        }
+      
+        console.log("????????????????????????");
+        console.log(restaurants);
         callback(null, restaurants);
       } else { // Oops!. Got an error from server.
         const error = (`Request failed. Returned status of ${xhr.status}`);
