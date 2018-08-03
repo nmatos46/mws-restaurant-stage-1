@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#444444">
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <link rel="stylesheet" href="css/styles.css">
   <title>Restaurant Reviews</title>
@@ -18,7 +19,7 @@
   <main id="maincontent">
     <section id="map-container">
       <!--Citations: Accessibility HTML, 1-->
-      <div id="map" aria-label="location" aria-role="application"></div>
+      <div id="map" aria-label="location" role="application"></div>
       <!--End of Citations: Accessibility HTML, 1-->
     </section>
     <section>
@@ -37,7 +38,7 @@
 
   <script type="application/javascript" charset="utf-8" src="js/idb.js"></script>  
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
-  <script type="application/javascript" charset="utf-8" src="js/indexController.js"></script>  
+  <script type="application/javascript" charset="utf-8" src="js/indexController.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANXwUw0y8NTHIaRusNk9prby7EmdeBGpE&libraries=places&callback=initMap"></script>
 

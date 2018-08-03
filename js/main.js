@@ -102,6 +102,10 @@ updateRestaurants = () => {
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
 
+  //change aria-label to match selected value
+  document.getElementById("neighborhoods-select").setAttribute("aria-label",neighborhood);
+  document.getElementById("cuisines-select").setAttribute("aria-label",cuisine);
+  
   DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
     if (error) { // Got an error!
       console.error(error);

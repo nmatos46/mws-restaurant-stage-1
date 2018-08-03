@@ -34,7 +34,7 @@ ul{
 }
 /******End of Citations:  Responsive Stlying, 2*/
 a {
-	color: orange;
+	color: darkslateblue;
 	text-decoration: none;
 }
 a:hover, a:focus {
@@ -60,12 +60,16 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 }
 #footer {
   background-color: #444;
-  color: #aaa;
+  color: #fff;
   font-size: 8pt;
   letter-spacing: 1px;
   padding: 25px;
   text-align: center;
   text-transform: uppercase;
+}
+
+#footer a {
+  color: orange;
 }
 
 /******Citations: Responsive Styling, 1
@@ -117,7 +121,7 @@ nav h1 a {
 
 /* Add a color to all links inside the list */
 #breadcrumb li a {
-    color: #0275d8;
+    color: darkblue;
     text-decoration: none;
 }
 
@@ -135,7 +139,7 @@ nav h1 a {
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   width: 100%;
-  background-color: orange;
+  background-color: darkslateblue;
   align-items: center;
 }
 
@@ -247,7 +251,7 @@ nav h1 a {
 /*Citations: Accessibility HTML, 2.2*/
 #restaurants-list li h2 {
 /*End of Citations: Accessibility HTML, 2.2*/  
-  color: #f18200;
+  color: darkslateblue;
   font-family: Arial,sans-serif;
   font-size: 14pt;
   font-weight: 200;
@@ -262,7 +266,7 @@ nav h1 a {
   font-size: 11pt;
 }
 #restaurants-list li button {
-  background-color: orange;
+  background-color: darkslateblue;
   border-bottom: 3px solid #eee;
   color: #fff;
   display: inline-block;
@@ -285,7 +289,7 @@ nav h1 a {
 }
 */
 .inside #map-container {
-  background: orange  none repeat scroll 0 0;
+  background: darkslateblue  none repeat scroll 0 0;
   right: 0;
   top: 80px;
   width: 100%;
@@ -301,7 +305,7 @@ nav h1 a {
   bottom: 0;
 }
 #restaurant-name {
-  color: #f18200;
+  color: darkslateblue;
   font-family: Arial,sans-serif;
   font-size: 20pt;
   font-weight: 200;
@@ -350,7 +354,7 @@ nav h1 a {
 }
 
 #reviews-container h2 {
-  color: #f58500;
+  color: darkslateblue;
   font-size: 24pt;
   font-weight: 300;
   letter-spacing: -1px;
