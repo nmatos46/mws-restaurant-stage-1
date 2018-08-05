@@ -139,16 +139,14 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     ul.append(createRestaurantHTML(restaurant));
 
-    //Initialize IDB with restaurant objects
-    console.log('sdfafawrgeafgergaergar');
-    console.log(idb.open('restrDB'));
-    var restrDBPromise = idb.open('restrDB').then( updateDB => {
-      var restrTX = updateDB.transaction('restaurants','readwrite');
-      var restStore = restrTX.objectStore('restaurants');
-      restStore.put(restaurant);
-    });
-    console.log('^^^^^^^^^^^^^^^^^^^');
-    console.log(idb.open('restrDB'));
+    //Initialize IDB with all restaurant objects
+    if (restaurants.length === 10){
+      var restrDBPromise = idb.open('restrDB').then( updateDB => {
+        var restrTX = updateDB.transaction('restaurants','readwrite');
+        var restStore = restrTX.objectStore('restaurants');
+        restStore.put(restaurant);
+      });
+    }
   });
 
   if (self.map){

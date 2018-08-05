@@ -4,6 +4,7 @@
  */
 let cacheAlways = [
     './',
+    './manifest.json',
     './index.html',
     './restaurant.html',
     './css/styles.css',

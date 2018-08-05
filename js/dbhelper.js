@@ -27,22 +27,17 @@ class DBHelper {
       var restStore = restrTX.objectStore('restaurants');
       var restaurantsDB = restStore.getAll();
       console.log("@@@@@@@@@@@@@@@");
-      console.log(restaurants);
+      console.log(restaurantsDB);
       return restaurantsDB;
     }).then(objects =>{
-      console.log("$$$$$$$$$$$$$$$$$$$");
-      console.log(restaurants);
-      console.log(objects);
-      if (restaurants.length != 10){
-        console.log("THIS IS UNNECESSARY!!!");
+      if (!(restaurants.length===10)){
+        console.log("$$$$$$$$$$$$$$$$$$$");
         console.log(restaurants);
+        console.log(objects);
         restaurants = objects;
         callback(null, restaurants);
       }
-      
     });
-    console.log("!!!!!!!!!!!!!!!");
-    console.log(restaurants);
     
     //fetch restaurants from server
     let xhr = new XMLHttpRequest();
@@ -50,15 +45,13 @@ class DBHelper {
     xhr.onload = () => {
       if (xhr.status === 200) { // Got a success response from server!
         
+        //if the 10 restaurant objects were not fetched from idb
         if (restaurants.length != 10){
           console.log(`***********************`);
           restaurants = JSON.parse(xhr.responseText);
           console.log(restaurants);
+          callback(null, restaurants);
         }
-      
-        console.log("????????????????????????");
-        console.log(restaurants);
-        callback(null, restaurants);
       } else { // Oops!. Got an error from server.
         const error = (`Request failed. Returned status of ${xhr.status}`);
         callback(error, null);
