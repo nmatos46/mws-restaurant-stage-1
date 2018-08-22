@@ -179,7 +179,7 @@ createRestaurantHTML = (restaurant) => {
    */
   
   //Add accessbility friendly images
-  image.alt = restaurant.alt_text;
+  image.alt = altTxt[restaurant.name];
   li.append(image);
   
   /**Citations: Accessibility HTML, 2.2 */

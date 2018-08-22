@@ -81,7 +81,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
    */
 
   //Add accessbility friendly images
-  image.alt = restaurant.alt_text;
+  image.alt = altTxt[restaurant.name];
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
