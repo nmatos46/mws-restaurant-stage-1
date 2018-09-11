@@ -162,6 +162,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  */
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
+  console.log(restaurant.is_favorite);
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';

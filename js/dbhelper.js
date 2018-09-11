@@ -16,6 +16,29 @@ class DBHelper {
   }
 
   /**
+   * Database url for reviews from one restaurant in the database
+   */
+  static restaurantReviews_URL(restaurantID, callback){
+    fetch(`http://localhost:1337/reviews/?restaurant_id=${restaurantID}`)
+    .then(data => {
+	    let dataJ = data.json();
+	    return dataJ;
+    }).then(reviewsArr => {
+      console.log(reviewsArr);
+      callback(null, reviewsArr);
+    });
+  }
+
+  static review_URL(reviewID, callback){
+    return `http://localhost:1337/reviews/${reviewID}`;
+  }
+
+  static fetchRestaurantReviews(callback){
+    let reviews = {};
+
+
+  }
+  /**
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
@@ -30,34 +53,38 @@ class DBHelper {
       console.log(restaurantsDB);
       return restaurantsDB;
     }).then(objects =>{
-      if (!(restaurants.length===10)){
-        console.log("$$$$$$$$$$$$$$$$$$$");
-        console.log(restaurants);
-        console.log(objects);
-        restaurants = objects;
-        callback(null, restaurants);
-      }
+
+    //If there are objects in the idb database
+    if (objects.length > 0){
+      console.log("$$$$$$$$$$$$$$$$$$$");
+      console.log(restaurants);
+      console.log(objects);
+      restaurants = objects;
+      callback(null, restaurants);
+    }
+    else{
+      //fetch restaurants from server if not fetched from idb
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', DBHelper.DATABASE_URL);
+      xhr.onload = () => {
+        if (xhr.status === 200) { // Got a success response from server!
+          
+          //if the 10 restaurant objects were not fetched from idb
+          if (restaurants.length != 10){
+            console.log(`***********************`);
+            restaurants = JSON.parse(xhr.responseText);
+            console.log(restaurants);
+            callback(null, restaurants);
+          }
+        } else { // Oops!. Got an error from server.
+          const error = (`Request failed. Returned status of ${xhr.status}`);
+          callback(error, null);
+        }
+      };
+      xhr.send();
+    }
     });
     
-    //fetch restaurants from server
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', DBHelper.DATABASE_URL);
-    xhr.onload = () => {
-      if (xhr.status === 200) { // Got a success response from server!
-        
-        //if the 10 restaurant objects were not fetched from idb
-        if (restaurants.length != 10){
-          console.log(`***********************`);
-          restaurants = JSON.parse(xhr.responseText);
-          console.log(restaurants);
-          callback(null, restaurants);
-        }
-      } else { // Oops!. Got an error from server.
-        const error = (`Request failed. Returned status of ${xhr.status}`);
-        callback(error, null);
-      }
-    };
-    xhr.send();
   }
 
   /**

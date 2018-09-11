@@ -17,13 +17,14 @@
  */
 
 /**Register the service worker once main.js is called.*/
+/**
 if (navigator.serviceWorker){
     navigator.serviceWorker.register('sw.js')
     .catch(err => {
       console.log("Service Worker: C'est mort!!!!", err);
     });
   }
-
+*/
 /**End of Citations: Service Worker Code 2,
  *            Heading "Registering the service worker"
  */
