@@ -15,29 +15,47 @@ class DBHelper {
     return `http://localhost:1337/restaurants`;
   }
 
+  /**Citation: Handling failed http responses
+   * https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
+   */
+  static returnError(promiseResponse,callback){
+    if (!promiseResponse.ok){
+      callback(promiseResponse.statusText,null);
+      return;
+    }
+    return promiseResponse;
+  }
+
   /**
    * Database url for reviews from one restaurant in the database
    */
   static restaurantReviews_URL(restaurantID, callback){
     fetch(`http://localhost:1337/reviews/?restaurant_id=${restaurantID}`)
+    .then(promiseResponse => {
+      if (!promiseResponse.ok){
+        callback(promiseResponse.statusText,null);
+        return;
+      }
+      return promiseResponse;
+    })
     .then(data => {
 	    let dataJ = data.json();
 	    return dataJ;
-    }).then(reviewsArr => {
-      console.log(reviewsArr);
+    })
+    .then(reviewsArr => {
       callback(null, reviewsArr);
     });
   }
+    
+  
 
   static review_URL(reviewID, callback){
     return `http://localhost:1337/reviews/${reviewID}`;
   }
 
-  static fetchRestaurantReviews(callback){
-    let reviews = {};
+  /**End of Citation: Handling failed http responses */
 
 
-  }
   /**
    * Fetch all restaurants.
    */

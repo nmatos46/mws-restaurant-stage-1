@@ -1,4 +1,5 @@
 let restaurant;
+let reviews;
 var map;
 
 /**
@@ -90,8 +91,19 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
   }
-  // fill reviews
-  fillReviewsHTML();
+
+  DBHelper.restaurantReviews_URL(restaurant.id,(error,reviews)=>{
+    if (!reviews){
+      //if there are no reviews
+      console.log(`Error fetching Restaurant Reviews: ${error}`);
+      return;
+    }
+    else{
+      self.reviews = reviews;
+      fillReviewsHTML();
+    }
+  })
+  
   
   //configure the google map
   if (self.map){
@@ -128,12 +140,12 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-fillReviewsHTML = (reviews = self.restaurant.reviews) => {
+fillReviewsHTML = (reviews = self.reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
   container.appendChild(title);
-  
+
   if (!reviews) {
     const noReviews = document.createElement('p');
     noReviews.innerHTML = 'No reviews yet!';
