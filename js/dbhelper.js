@@ -32,11 +32,7 @@ class DBHelper {
   static restaurantReviews_URL(restaurantID, callback){
     fetch(`http://localhost:1337/reviews/?restaurant_id=${restaurantID}`)
     .then(promiseResponse => {
-      if (!promiseResponse.ok){
-        callback(promiseResponse.statusText,null);
-        return;
-      }
-      return promiseResponse;
+      return this.returnError(promiseResponse,callback);
     })
     .then(data => {
 	    let dataJ = data.json();
