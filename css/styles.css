@@ -37,6 +37,11 @@ a {
 	color: darkslateblue;
 	text-decoration: none;
 }
+a.mainFav {
+    margin: 0px 60px 100px 60px;
+    font-size: 50px;
+    padding: 40px;
+}
 a:hover, a:focus {
 	color: #3397db;
 	text-decoration: none;

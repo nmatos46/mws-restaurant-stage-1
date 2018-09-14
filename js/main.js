@@ -201,12 +201,34 @@ createRestaurantHTML = (restaurant) => {
   li.append(address);
   
   //Add Accessibility friendly buttons
-  const more = document.createElement('button');
-  more.innerHTML = `See ${restaurant.name} Details`;
-  more.addEventListener("click", () => {
+  const deets = document.createElement('button');
+  deets.innerHTML = `See ${restaurant.name} Details`;
+  deets.addEventListener("click", () => {
     window.location.href = DBHelper.urlForRestaurant(restaurant);
   });
-  li.append(more);
+  li.append(deets);
+
+  //Add favorite button
+  const fav = document.createElement('a');
+  fav.href = 'javascript:void(0)';
+  fav.className = 'mainFav';
+  //const favText = fav.append('font ');
+  //favText.color ='red';
+  if (restaurant.is_favorite===true){
+    fav.innerHTML='♥';
+  }else if (restaurant.is_favorite===false){
+    fav.innerHTML='♡';
+  }
+  fav.addEventListener('click', () => {
+    console.log('!!!!!!!!')
+    console.log(fav.innerHTML);
+    if (fav.innerHTML==='♡'){
+      fav.innerHTML='♥';
+    }else if (fav.innerHTML==='♥'){
+      fav.innerHTML='♡';
+    }
+  });
+  li.append(fav);
 
   return li
 }
