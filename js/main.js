@@ -145,6 +145,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
         var restrTX = updateDB.transaction('restaurants','readwrite');
         var restStore = restrTX.objectStore('restaurants');
         restStore.put(restaurant);
+        return restrTX.complete;
       });
     }
   });

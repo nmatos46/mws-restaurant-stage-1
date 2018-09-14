@@ -39,6 +39,7 @@ class DBHelper {
 	    return dataJ;
     })
     .then(reviewsArr => {
+      console.log(reviewsArr);
       callback(null, reviewsArr);
     });
   }

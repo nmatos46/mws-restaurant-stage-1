@@ -157,6 +157,15 @@ fillReviewsHTML = (reviews = self.reviews) => {
     ul.appendChild(createReviewHTML(review));
   });
   container.appendChild(ul);  
+
+  var reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
+    var reviewsTX = updateDB.transaction('reviews','readwrite');
+    var reviewsStore = reviewsTX.objectStore('reviews');
+    reviews.forEach(review => {
+      reviewsStore.put(review);
+    })
+    return reviewsTX.complete;
+  });
 }
 
 /**
@@ -169,7 +178,7 @@ createReviewHTML = (review) => {
   li.appendChild(name);
 
   const date = document.createElement('p');
-  date.innerHTML = review.date;
+  date.innerHTML = Date(review.updatedAt);
   li.appendChild(date);
 
   const rating = document.createElement('p');

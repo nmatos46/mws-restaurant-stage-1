@@ -33,8 +33,13 @@ if (navigator.serviceWorker){
  *            Heading "Indexed DB API"
  */
 
-var restrDBPromise = idb.open('restrDB', 1, function(updateDB) {
+const restrDBPromise = idb.open('restrDB', 1, function(updateDB) {
   updateDB.createObjectStore('restaurants', {keyPath: 'id'});
+});
+
+const reviewsDBPromise = idb.open('reviewsDB', 1, function(updateDB) {
+  let reviewsStore = updateDB.createObjectStore('reviews', {keyPath: 'id',});
+  reviewsStore.createIndex('reviews',['restaurant_id','name']);
 });
 
 /**End of Citations: Service Worker Code 2,
