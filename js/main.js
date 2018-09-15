@@ -214,9 +214,9 @@ createRestaurantHTML = (restaurant) => {
   fav.className = 'mainFav';
   //const favText = fav.append('font ');
   //favText.color ='red';
-  if (restaurant.is_favorite===true){
+  if (restaurant.is_favorite==true){
     fav.innerHTML='♥';
-  }else if (restaurant.is_favorite===false){
+  }else if (restaurant.is_favorite==false){
     fav.innerHTML='♡';
   }
   fav.addEventListener('click', () => {
@@ -227,6 +227,7 @@ createRestaurantHTML = (restaurant) => {
     }else if (fav.innerHTML==='♥'){
       fav.innerHTML='♡';
     }
+    fav.blur();
   });
   li.append(fav);
 

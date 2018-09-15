@@ -39,7 +39,7 @@ const restrDBPromise = idb.open('restrDB', 1, function(updateDB) {
 
 const reviewsDBPromise = idb.open('reviewsDB', 1, function(updateDB) {
   let reviewsStore = updateDB.createObjectStore('reviews', {keyPath: 'id',});
-  reviewsStore.createIndex('reviews',['restaurant_id','name']);
+  reviewsStore.createIndex('restaurant_id','restaurant_id');
 });
 
 /**End of Citations: Service Worker Code 2,

@@ -30,17 +30,37 @@ class DBHelper {
    * Database url for reviews from one restaurant in the database
    */
   static restaurantReviews_URL(restaurantID, callback){
-    fetch(`http://localhost:1337/reviews/?restaurant_id=${restaurantID}`)
-    .then(promiseResponse => {
-      return this.returnError(promiseResponse,callback);
-    })
-    .then(data => {
-	    let dataJ = data.json();
-	    return dataJ;
-    })
-    .then(reviewsArr => {
-      console.log(reviewsArr);
-      callback(null, reviewsArr);
+    let reviews = [];
+    //get reviews from idb if you can
+    var reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
+      var reviewsTX = updateDB.transaction('reviews');
+      var reviewsStore = reviewsTX.objectStore('reviews');
+      var reviewsIndex = reviewsStore.index('restaurant_id');
+      var reviewsDB = reviewsIndex.getAll(restaurantID)
+      return reviewsDB;
+    }).then(objects =>{
+      //If there are review objects in the idb database
+      if (objects.length > 0){
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!$$$$$$$$$$$$$$$$$$$");
+        console.log(reviews);
+        console.log(objects);
+        reviews = objects;
+        callback(null, reviews);
+      }
+      else{
+        fetch(`http://localhost:1337/reviews/?restaurant_id=${restaurantID}`)
+        .then(promiseResponse => {
+          return this.returnError(promiseResponse,callback);
+        })
+        .then(data => {
+          let dataJ = data.json();
+          return dataJ;
+        })
+        .then(reviewsArr => {
+          console.log(reviewsArr);
+          callback(null, reviewsArr);
+        });
+      }
     });
   }
     
