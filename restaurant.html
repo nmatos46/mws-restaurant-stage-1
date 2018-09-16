@@ -59,7 +59,39 @@
     </section>
     <!-- End map -->
     <!-- Beginning reviews -->
+    <section id="form-container">
+      <h2>Leave a review!</h2>
+      <form action="" id="reviews-form">
+        Name: 
+        <br>  
+        <input type="text"/>
+        <br>
+        <br>
+        Rating: 
+        <br>
+        <select id="rating-select" name="rating" onchange="" required>
+            <option value="select">Select rating</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br>
+        <br>
+        Comments:
+        <br>
+        <textarea rows="4" cols="50" required>
+        </textarea>
+        <br>
+        <br>
+        <input type="submit" value="Submit">
+        <!--<button>Submit</button>-->
+      </form>
+    </section>
+    
     <section id="reviews-container">
+      <h2>Reviews</h2>
       <ul id="reviews-list"></ul>
     </section>
     <!-- End reviews -->

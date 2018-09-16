@@ -294,7 +294,7 @@ nav h1 a {
 }
 */
 
-button.restrFav {
+button.restrFav, #form-container button {
   background-color: darkslateblue;
   border-bottom: 3px solid #eee;
   color: #fff;
@@ -365,12 +365,47 @@ button.restrFav {
   padding: 20px 40px 30px;
   text-align: center;
 }
+
+section#form-container {
+  background: #444;
+  color: white;
+  font-size:16pt;
+  padding: 40px;
+  padding-left: 10%;
+  padding-right: 20%;
+}
+
+#form-container input{
+  height: 35px;
+  letter-spacing: 0;
+  padding: 0 10px;
+  width: 200px;
+  font-size: 18px;
+}
+
+#form-container #rating-select{
+  height: 35px;
+  letter-spacing: 0;
+  padding: 0px 10px;
+  width: 200px;
+  font-size: 18px;
+}
+
+#form-container textarea{
+  letter-spacing: 0;
+  padding: 0 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
+
+
 #restaurant-container {
   text-align: center;
 }
 
 #reviews-container {
-  padding: 30px 40px 80px;
+  padding: 30px 40px 0px;
 }
 
 #reviews-container h2 {
@@ -385,6 +420,9 @@ button.restrFav {
   margin: 0;
   padding: 20px;
   text-align: left;
+  max-height: 420px;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 #reviews-list li {
@@ -396,7 +434,7 @@ button.restrFav {
   overflow: hidden;
   padding: 20px 20px 20px;
   position: relative;
-  max-width: 200px;
+  max-width: 100%;
 }
 
 

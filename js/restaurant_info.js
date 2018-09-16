@@ -133,21 +133,19 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   
   
   //configure the google map
-  /**
   if (self.map){
     self.map.setOptions({
       zoom: 16,
       center: restaurant.latlng,
       scrollwheel: false
     })
+    /** 
     .catch(error => {
       console.log(`${error.name}: ${error.message}`);
-    
-
     });
+    */
     DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
   }
-   */
 }
 
 /**
@@ -175,10 +173,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  */
 fillReviewsHTML = (reviews = self.reviews) => {
   const container = document.getElementById('reviews-container');
-  const title = document.createElement('h2');
-  title.innerHTML = 'Reviews';
-  container.appendChild(title);
-
+  
   if (!reviews) {
     const noReviews = document.createElement('p');
     noReviews.innerHTML = 'No reviews yet!';
