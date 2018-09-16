@@ -212,20 +212,29 @@ createRestaurantHTML = (restaurant) => {
   const fav = document.createElement('a');
   fav.href = 'javascript:void(0)';
   fav.className = 'mainFav';
-  //const favText = fav.append('font ');
-  //favText.color ='red';
+  let unfavor = '♥';
+  let favor = '♡';
   if (restaurant.is_favorite==true){
-    fav.innerHTML='♥';
+    fav.innerHTML = unfavor;
+    fav.setAttribute('aria-label',`Unfavorite ${restaurant.name} button`);
   }else if (restaurant.is_favorite==false){
-    fav.innerHTML='♡';
+    fav.innerHTML = favor;
+    fav.setAttribute('aria-label',`Favorite ${restaurant.name} button`);
   }
+
+  //Change fav state when button is clicked
   fav.addEventListener('click', () => {
     console.log('!!!!!!!!')
     console.log(fav.innerHTML);
-    if (fav.innerHTML==='♡'){
-      fav.innerHTML='♥';
-    }else if (fav.innerHTML==='♥'){
-      fav.innerHTML='♡';
+    if (fav.innerHTML===favor){
+      fav.innerHTML=unfavor;
+      fav.setAttribute('aria-label',`Unfavorite ${restaurant.name} button`);
+      DBHelper.changeFavState(restaurant,true);
+    }else if (fav.innerHTML===unfavor){
+      fav.innerHTML=favor;
+      fav.setAttribute('aria-label',`Favorite ${restaurant.name} button`);
+      //store new fav state in idb and server
+      DBHelper.changeFavState(restaurant,false);
     }
     fav.blur();
   });

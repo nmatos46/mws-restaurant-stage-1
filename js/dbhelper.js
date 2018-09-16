@@ -27,16 +27,16 @@ class DBHelper {
   }
 
   /**
-   * Database url for reviews from one restaurant in the database
+   * Fetch all reviews from a particular restaurant
    */
-  static restaurantReviews_URL(restaurantID, callback){
+  static fetchRestaurantReviews(restaurantID, callback){
     let reviews = [];
     //get reviews from idb if you can
-    var reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
-      var reviewsTX = updateDB.transaction('reviews');
-      var reviewsStore = reviewsTX.objectStore('reviews');
-      var reviewsIndex = reviewsStore.index('restaurant_id');
-      var reviewsDB = reviewsIndex.getAll(restaurantID)
+    let reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
+      let reviewsTX = updateDB.transaction('reviews');
+      let reviewsStore = reviewsTX.objectStore('reviews');
+      let reviewsIndex = reviewsStore.index('restaurant_id');
+      let reviewsDB = reviewsIndex.getAll(restaurantID)
       return reviewsDB;
     }).then(objects =>{
       //If there are review objects in the idb database
@@ -48,6 +48,7 @@ class DBHelper {
         callback(null, reviews);
       }
       else{
+        //fetch reviews from server
         fetch(`http://localhost:1337/reviews/?restaurant_id=${restaurantID}`)
         .then(promiseResponse => {
           return this.returnError(promiseResponse,callback);
@@ -63,12 +64,49 @@ class DBHelper {
       }
     });
   }
-    
   
-
-  static review_URL(reviewID, callback){
-    return `http://localhost:1337/reviews/${reviewID}`;
+  /**
+   * Change the is_favorite value for a restaurant object in idb and beyond.
+   * @param {restaurant object} restaurant
+   * @param {Boolean} newFavState
+   */
+  static changeFavState(restaurant,newFavState) {
+    //change is_favorite in idb
+    let restrDBPromise = idb.open('restrDB').then( updateDB => {
+      let restrTX = updateDB.transaction('restaurants','readwrite');
+      let restStore = restrTX.objectStore('restaurants');
+      let restaurantsDB = restStore.get(restaurant.id).then(object => {
+        object.is_favorite = newFavState
+        restStore.put(object)
+      });
+      return restrTX.complete;
+    })
+    if (!window.navigator.onLine){
+      //if you are offline, update server when back online
+      console.log('OH NO. TIS OFFLINE!!!!!!!!')
+      window.addEventListener('online',event => {
+        console.log('Calm yourself. We back online~~~~~~~~~')
+        DBHelper.changeServedFavState(restaurant.id,newFavState);
+      });  
+    }else{
+      //update server
+      console.log('Tis Online Sah~~~~~~~~~~~~~~~~~~~~~~~~')
+      DBHelper.changeServedFavState(restaurant.id,newFavState);
+    }
+    
   }
+
+  /**
+   * Change fav state of restaurant in the server
+   * @param {restaurant Object} restaurantID 
+   * @param {Boolean} newFavState 
+   */
+  static changeServedFavState(restaurantID,newFavState){
+    fetch(`http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${newFavState}`,{
+      method: 'PUT'
+    });
+  }
+
 
   /**End of Citation: Handling failed http responses */
 
@@ -80,10 +118,10 @@ class DBHelper {
     let restaurants = {};
     
     //fetch restaurants from idb
-    var restrDBPromise = idb.open('restrDB').then( updateDB => {
-      var restrTX = updateDB.transaction('restaurants');
-      var restStore = restrTX.objectStore('restaurants');
-      var restaurantsDB = restStore.getAll();
+    let restrDBPromise = idb.open('restrDB').then( updateDB => {
+      let restrTX = updateDB.transaction('restaurants');
+      let restStore = restrTX.objectStore('restaurants');
+      let restaurantsDB = restStore.getAll();
       console.log("@@@@@@@@@@@@@@@");
       console.log(restaurantsDB);
       return restaurantsDB;

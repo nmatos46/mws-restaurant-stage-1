@@ -1,6 +1,6 @@
 let restaurant;
 let reviews;
-var map;
+let map;
 
 /**
  * Fill in restaurant html after DOM has loaded
@@ -70,6 +70,33 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.className = 'restaurant-img';
   image.src = `/imgSmall/${restaurant.id}.jpg`; 
 
+  //Add html to fav button
+  const fav = document.getElementsByClassName('restrFav')[0];
+  let unfavor = `Unfavorite ${restaurant.name}`;
+  let favor = `Favorite ${restaurant.name}`;
+  //let unfavor = '♥';
+  //let favor = '♡';
+  if (restaurant.is_favorite==true){
+    fav.innerHTML=unfavor;
+  }else if (restaurant.is_favorite==false){
+    fav.innerHTML=favor;
+  }
+
+  //change fav state of restaurant on-click
+  fav.addEventListener('click', () => {
+    console.log('!!!!!!!!')
+    console.log(fav.innerHTML);
+    if (fav.innerHTML===favor){
+      fav.innerHTML=unfavor;
+      DBHelper.changeFavState(restaurant,true);
+    }else if (fav.innerHTML===unfavor){
+      fav.innerHTML=favor;
+      //store new fav state in idb and server
+      DBHelper.changeFavState(restaurant,false);
+    }
+    fav.blur();
+  });
+
    /**Citations: Responsive Styling, 1
    *            Heading "Full Responsiveness"
    * Notes:
@@ -92,7 +119,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
 
-  DBHelper.restaurantReviews_URL(restaurant.id,(error,reviews)=>{
+  DBHelper.fetchRestaurantReviews(restaurant.id,(error,reviews)=>{
     if (!reviews){
       //if there are no reviews
       console.log(`Error fetching Restaurant Reviews: ${error}`);
@@ -106,15 +133,21 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   
   
   //configure the google map
+  /**
   if (self.map){
     self.map.setOptions({
       zoom: 16,
       center: restaurant.latlng,
       scrollwheel: false
+    })
+    .catch(error => {
+      console.log(`${error.name}: ${error.message}`);
+    
+
     });
     DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
   }
-  
+   */
 }
 
 /**

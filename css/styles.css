@@ -293,6 +293,21 @@ nav h1 a {
   z-index: 1000;
 }
 */
+
+button.restrFav {
+  background-color: darkslateblue;
+  border-bottom: 3px solid #eee;
+  color: #fff;
+  display: inline-block;
+  font-size: 10pt;
+  margin: 15px 1.5em;
+  padding: 8px 30px 10px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  min-height: 53px;
+}
+
 .inside #map-container {
   background: darkslateblue  none repeat scroll 0 0;
   right: 0;
