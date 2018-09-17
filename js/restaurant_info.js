@@ -168,12 +168,26 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
   }
 }
 
+changeRatingAria = () =>{
+  const ratingSelect = document.getElementById('rating');
+  const ratingIndex = ratingSelect.selectedIndex;
+  const rating = ratingSelect[ratingIndex].value;
+
+  //change aria-label to match selected value
+  document.getElementById("rating").setAttribute("aria-label",`Input Rating Value ${rating}`);
+  console.log("HA! This works");
+}
+
+submitReview = () => {
+  console.log("WOOT! Getting there bit by bit, eh???")
+}
+
 /**
  * Create all reviews HTML and add them to the webpage.
  */
 fillReviewsHTML = (reviews = self.reviews) => {
   const container = document.getElementById('reviews-container');
-  
+
   if (!reviews) {
     const noReviews = document.createElement('p');
     noReviews.innerHTML = 'No reviews yet!';

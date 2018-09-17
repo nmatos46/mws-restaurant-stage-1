@@ -59,18 +59,22 @@
     </section>
     <!-- End map -->
     <!-- Beginning reviews -->
+
+    <!--Citation: Student Slide | Live Webinar MWS Stage 3
+        https://docs.google.com/presentation/d/1i_b30OvHtmKXWI5oUknDIto5S2YnfJC619mYYq1QpJ4/edit#slide=id.g3a8066f5a6_0_15
+    -->
     <section id="form-container">
       <h2>Leave a review!</h2>
       <form action="" id="reviews-form">
-        Name: 
+        <label for="review-name">Name: </label>
         <br>  
-        <input type="text"/>
+        <input id="review-name" type="text" name="name" required/>
         <br>
         <br>
         Rating: 
         <br>
-        <select id="rating-select" name="rating" onchange="" required>
-            <option value="select">Select rating</option>
+        <select aria-label="Input Rating Value" id="rating" name="rating" onchange="changeRatingAria()" required>
+            <option value="select">Omitted</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -79,16 +83,15 @@
         </select>
         <br>
         <br>
-        Comments:
+        <label for="review">Comments:</label>
         <br>
-        <textarea rows="4" cols="50" required>
-        </textarea>
+        <textarea id="review" name="comments" required></textarea>
         <br>
         <br>
-        <input type="submit" value="Submit">
-        <!--<button>Submit</button>-->
+        <button onclick="submitReview()">Submit Review</button>
       </form>
     </section>
+    <!--End of Citation:Student Slide | Live Webinar MWS Stage 3-->
     
     <section id="reviews-container">
       <h2>Reviews</h2>
