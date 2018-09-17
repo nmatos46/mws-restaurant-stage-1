@@ -7,6 +7,7 @@ let cacheAlways = [
     './manifest.json',
     './index.html',
     './restaurant.html',
+    './js/altTxt.js',
     './css/styles.css',
     './js/main.js',
     './js/restaurant_info.js',

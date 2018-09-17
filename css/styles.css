@@ -399,6 +399,14 @@ section#form-container {
   height: 100px;
 }
 
+#form-container p{
+  margin: 15px 1.5em;
+  padding: 8px 30px 10px;
+  text-align: left;
+  color: white;
+  font-size: 14px;
+}
+
 
 
 #restaurant-container {
@@ -436,6 +444,12 @@ section#form-container {
   padding: 20px 20px 20px;
   position: relative;
   max-width: 100%;
+}
+
+#offline-review{
+  text-align: center;
+  font-weight: bold;
+  color: red;
 }
 
 

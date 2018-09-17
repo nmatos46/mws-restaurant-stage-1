@@ -32,36 +32,52 @@ class DBHelper {
   static fetchRestaurantReviews(restaurantID, callback){
     let reviews = [];
     //get reviews from idb if you can
-    let reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
-      let reviewsTX = updateDB.transaction('reviews');
-      let reviewsStore = reviewsTX.objectStore('reviews');
-      let reviewsIndex = reviewsStore.index('restaurant_id');
-      let reviewsDB = reviewsIndex.getAll(restaurantID)
-      return reviewsDB;
-    }).then(objects =>{
-      //If there are review objects in the idb database
-      if (objects.length > 0){
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!$$$$$$$$$$$$$$$$$$$");
-        console.log(reviews);
-        console.log(objects);
-        reviews = objects;
-        callback(null, reviews);
-      }
-      else{
-        //fetch reviews from server
-        fetch(`http://localhost:1337/reviews/?restaurant_id=${restaurantID}`)
-        .then(promiseResponse => {
-          return this.returnError(promiseResponse,callback);
-        })
-        .then(data => {
-          let dataJ = data.json();
-          return dataJ;
-        })
-        .then(reviewsArr => {
-          console.log(reviewsArr);
-          callback(null, reviewsArr);
-        });
-      }
+    if(window.navigator.onLine){
+      return this.fetchRestaurantsFromServer(restaurantID,callback);
+    }else{
+      let reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
+        let reviewsTX = updateDB.transaction('reviews');
+        let reviewsStore = reviewsTX.objectStore('reviews');
+        let reviewsIndex = reviewsStore.index('restaurant_id');
+        let reviewsDB = reviewsIndex.getAll(restaurantID)
+        return reviewsDB;
+      }).then(objects =>{
+        //If there are review objects in the idb database
+        if (objects.length > 0){
+          console.log("!!!!!!!!!!!!!!!!!!!!!!!$$$$$$$$$$$$$$$$$$$");
+          console.log(reviews);
+          console.log(objects);
+          reviews = objects;
+          callback(null, reviews);
+        }
+        else{
+          //fetch reviews from server
+          callback('There are currently no reviews in idb.',null);
+        }
+      });
+    }
+
+
+    
+  }
+
+  /**
+   * Get restaurant reviews from server by ID
+   * @param {int} restaurantID 
+   * @param {function} callback 
+   */
+  static fetchRestaurantsFromServer(restaurantID,callback){
+    fetch(`http://localhost:1337/reviews/?restaurant_id=${restaurantID}`)
+    .then(promiseResponse => {
+      return this.returnError(promiseResponse,callback);
+    })
+    .then(data => {
+      let dataJ = data.json();
+      return dataJ;
+    })
+    .then(reviewsArr => {
+      console.log(reviewsArr);
+      callback(null, reviewsArr);
     });
   }
   
@@ -105,6 +121,54 @@ class DBHelper {
     fetch(`http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${newFavState}`,{
       method: 'PUT'
     });
+  }
+
+  static updateServerReviews(review){
+    console.log('ayyyyyyyyy');
+    console.log(review);
+    let reviewPost = {
+      "restaurant_id": review.restaurant_id,
+      "name": review.name,
+      "rating": review.rating,
+      "comments": review.comments
+    }
+    console.log(JSON.stringify(reviewPost));
+
+    let requestURL = 'http://localhost:1337/reviews/';
+    
+    //Update server data
+    fetch(requestURL,{
+      method: 'POST',
+      body: JSON.stringify(reviewPost),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(`${error.name}: ${error.message}`);
+    });
+
+    /** 
+    //Update idb data with data from the server
+    let reviewsIDB = {};
+    this.fetchRestaurantsFromServer(review.restaurant_id,(error,reviews) => {
+      if (!reviews){
+        //if there are no reviews
+        console.log(`Error fetching Restaurant Reviews: ${error}`);
+        return;
+      }
+      else{
+        reviewsIDB = reviews;
+      }
+      console.log("?????????????????????????$$$$$$$$$$$$$$$$$??????????????????")
+      console.log(reviewsIDB);
+    });
+    */
+    
+    
   }
 
 

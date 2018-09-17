@@ -10,7 +10,14 @@ document.addEventListener('DOMContentLoaded', event => {
   * Initialize Google map, called from HTML.
   */
   window.initMap = () => {
-    self.map = new google.maps.Map(document.getElementById('map'));
+    //initialize map object
+    self.map = new google.maps.Map(document.getElementById('map'),{
+      zoom: 16,
+      center: {lat:0,lng:0}
+    });
+    console.log('#######################')
+    console.log(self.map);
+
     if (self.restaurant){
       self.map.setOptions({
         zoom: 16,
@@ -35,12 +42,12 @@ document.addEventListener('DOMContentLoaded', event => {
  */
 fetchRestaurantFromURL = (callback) => {
   if (self.restaurant) { // restaurant already fetched!
-    callback(null, self.restaurant)
+    callback(null, self.restaurant);
     return;
   }
   const id = getParameterByName('id');
   if (!id) { // no id found in URL
-    error = 'No restaurant id in URL'
+    error = 'No restaurant id in URL';
     callback(error, null);
   } else {
     DBHelper.fetchRestaurantById(id, (error, restaurant) => {
@@ -50,7 +57,7 @@ fetchRestaurantFromURL = (callback) => {
         return;
       }
       fillRestaurantHTML();
-      callback(null, restaurant)
+      callback(null, restaurant);
     });
   }
 }
@@ -84,7 +91,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   //change fav state of restaurant on-click
   fav.addEventListener('click', () => {
-    console.log('!!!!!!!!')
+    console.log('!!!!!!!!');
     console.log(fav.innerHTML);
     if (fav.innerHTML===favor){
       fav.innerHTML=unfavor;
@@ -132,8 +139,14 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   })
   
   
-  //configure the google map
+  //configure the google map  
   if (self.map){
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    console.log(self.map);
+    if (self.map.tagName==="DIV"){
+      fillBreadcrumb();
+    }
+    
     self.map.setOptions({
       zoom: 16,
       center: restaurant.latlng,
@@ -146,6 +159,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     */
     DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
   }
+  
+  
 }
 
 /**
@@ -179,7 +194,51 @@ changeRatingAria = () =>{
 }
 
 submitReview = () => {
-  console.log("WOOT! Getting there bit by bit, eh???")
+  console.log("WOOT! Getting there bit by bit, eh???");
+  let name = document.getElementById("review-name").value;
+  let rating = parseInt(document.getElementById("rating").value);
+  let formReview = document.getElementById("review").value;
+
+  let restaurantID = parseInt(getParameterByName('id'));
+  let reviewDate = new Date();
+  
+  let review = {
+    "id": 404,
+    "restaurant_id": restaurantID,
+    "name": name,
+    "createdAt": reviewDate,
+    "updatedAt": reviewDate,
+    "rating": rating,
+    "comments": formReview
+  };
+
+  console.log(review);
+  //add in an offline review
+  if (!window.navigator.onLine){
+    const ul = document.getElementById('reviews-list');
+    const offlineReview = ul.appendChild(createReviewHTML(review));
+    const offlineMessage = document.createElement('p');
+    offlineMessage.setAttribute('id','offline-review');
+    offlineMessage.innerHTML = 'Offline';
+    offlineReview.appendChild(offlineMessage);
+    ul.appendChild(offlineReview);
+    window.addEventListener('online',event => {
+      //Post review to server
+      DBHelper.updateServerReviews(review);
+    });
+  }else{
+    //Post review to server
+    DBHelper.updateServerReviews(review);
+  }
+  
+
+  //add a message after button is clicked
+  const reviewForm = document.getElementById('form-container');
+  const message = document.createElement('p');
+  message.innerHTML = "Review submitted! Refresh the page then see below :)";
+  reviewForm.appendChild(message);
+
+  document.getElementById("reviews-form").reset();
 }
 
 /**
@@ -205,7 +264,7 @@ fillReviewsHTML = (reviews = self.reviews) => {
     var reviewsStore = reviewsTX.objectStore('reviews');
     reviews.forEach(review => {
       reviewsStore.put(review);
-    })
+    });
     return reviewsTX.complete;
   });
 }
@@ -248,14 +307,20 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
  * Get a parameter by name from page URL.
  */
 getParameterByName = (name, url) => {
-  if (!url)
+  if (!url){
     url = window.location.href;
+  }
+
   name = name.replace(/[\[\]]/g, '\\$&');
-  const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`),
-    results = regex.exec(url);
-  if (!results)
+  const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
+  let results = regex.exec(url);
+  
+  if (!results){
     return null;
-  if (!results[2])
+  }
+  
+  if (!results[2]){
     return '';
+  }
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
