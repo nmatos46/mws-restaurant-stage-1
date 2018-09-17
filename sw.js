@@ -11,7 +11,8 @@ let cacheAlways = [
     './css/styles.css',
     './js/main.js',
     './js/restaurant_info.js',
-    './js/dbhelper.js'
+    './js/dbhelper.js',
+    './js/idb.js'
 ];
 /**End of "Citations: Service Worker Code 1,
  *                    Heading "Install a service worker""
@@ -36,7 +37,7 @@ for (let i=1; i<=10; i++){
  *   in the cache and returning a new response with a string if an error is 
  *   thrown.
  */
-let currentCache = 'myCacheNow';
+let currentCache = 'myCacheNow123';
 
 self.addEventListener("install", inst => {
     //Install predetermined caches before full install

@@ -220,7 +220,7 @@ submitReview = () => {
   const offlineReview = ul.appendChild(createReviewHTML(review));
   const offlineMessage = document.createElement('p');
   offlineMessage.setAttribute('id','offline-review');
-  offlineMessage.innerHTML = 'Refresh the page if online. The delete button does nothing until you refresh.';
+  offlineMessage.innerHTML = 'Offline';
   const breakSpace1 = document.createElement('br');
   const breakSpace2 = document.createElement('br');
   offlineReview.appendChild(breakSpace1);
@@ -232,7 +232,7 @@ submitReview = () => {
   var reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
     var reviewsTX = updateDB.transaction('reviews','readwrite');
     var reviewsStore = reviewsTX.objectStore('reviews');
-    reviewsStore.put(offlineReview);
+    reviewsStore.put(review);
     return reviewsTX.complete;
   });
 
@@ -277,6 +277,7 @@ fillReviewsHTML = (reviews = self.reviews) => {
   var reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
     var reviewsTX = updateDB.transaction('reviews','readwrite');
     var reviewsStore = reviewsTX.objectStore('reviews');
+
     reviews.forEach(review => {
       reviewsStore.put(review);
     });
@@ -312,12 +313,14 @@ createReviewHTML = (review) => {
     let deleteMessage = '';
     deleteButton.addEventListener('click',()=>{
       if(!window.navigator.onLine){
+        deleteIDBReview(review.id);
         window.addEventListener('online',event => {
           deleteReview(review.id);  
         });
-        deleteMessage = 'Review to be deleted. Go online, then come back...'
+        deleteMessage = 'Review to be deleted in the server once back online. In the meantime, refresh the page, then come back...'
         
       }else{
+        deleteIDBReview(review.id);
         deleteReview(review.id);
         deleteMessage = 'Comment completely deleted. Refresh the page then come back :)';
       }
@@ -333,6 +336,15 @@ createReviewHTML = (review) => {
   }
 
   return li;
+}
+
+deleteIDBReview = (reviewID) => {
+  var reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
+    var reviewsTX = updateDB.transaction('reviews','readwrite');
+    var reviewsStore = reviewsTX.objectStore('reviews');
+    reviewsStore.delete(reviewID);
+    return reviewsTX.complete;
+  });
 }
 
 deleteReview = (reviewID) => {
