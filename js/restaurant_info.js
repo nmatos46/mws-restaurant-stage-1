@@ -89,6 +89,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fav.innerHTML=favor;
   }
 
+  //Favorite button code
   //change fav state of restaurant on-click
   fav.addEventListener('click', () => {
     console.log('!!!!!!!!');
@@ -213,15 +214,29 @@ submitReview = () => {
   };
 
   console.log(review);
+  
   //add in an offline review
-  if (!window.navigator.onLine){
-    const ul = document.getElementById('reviews-list');
-    const offlineReview = ul.appendChild(createReviewHTML(review));
-    const offlineMessage = document.createElement('p');
-    offlineMessage.setAttribute('id','offline-review');
-    offlineMessage.innerHTML = 'Offline';
-    offlineReview.appendChild(offlineMessage);
-    ul.appendChild(offlineReview);
+  const ul = document.getElementById('reviews-list');
+  const offlineReview = ul.appendChild(createReviewHTML(review));
+  const offlineMessage = document.createElement('p');
+  offlineMessage.setAttribute('id','offline-review');
+  offlineMessage.innerHTML = 'Refresh the page if online. The delete button does nothing until you refresh.';
+  const breakSpace1 = document.createElement('br');
+  const breakSpace2 = document.createElement('br');
+  offlineReview.appendChild(breakSpace1);
+  offlineReview.appendChild(breakSpace2);
+  offlineReview.appendChild(offlineMessage);
+  ul.appendChild(offlineReview);
+
+  //add dummy offline review to idb for now
+  var reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
+    var reviewsTX = updateDB.transaction('reviews','readwrite');
+    var reviewsStore = reviewsTX.objectStore('reviews');
+    reviewsStore.put(offlineReview);
+    return reviewsTX.complete;
+  });
+
+  if(!window.navigator.onLine){
     window.addEventListener('online',event => {
       //Post review to server
       DBHelper.updateServerReviews(review);
@@ -230,12 +245,12 @@ submitReview = () => {
     //Post review to server
     DBHelper.updateServerReviews(review);
   }
+ 
   
-
   //add a message after button is clicked
   const reviewForm = document.getElementById('form-container');
   const message = document.createElement('p');
-  message.innerHTML = "Review submitted! Refresh the page then see below :)";
+  message.innerHTML = "Review submitted! See below :)";
   reviewForm.appendChild(message);
 
   document.getElementById("reviews-form").reset();
@@ -290,7 +305,43 @@ createReviewHTML = (review) => {
   comments.innerHTML = review.comments;
   li.appendChild(comments);
 
+  //Add delete button for new comments
+  if (review.id > 30){
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = 'DELETE';
+    let deleteMessage = '';
+    deleteButton.addEventListener('click',()=>{
+      if(!window.navigator.onLine){
+        window.addEventListener('online',event => {
+          deleteReview(review.id);  
+        });
+        deleteMessage = 'Review to be deleted. Go online, then come back...'
+        
+      }else{
+        deleteReview(review.id);
+        deleteMessage = 'Comment completely deleted. Refresh the page then come back :)';
+      }
+      const breakSpace1 = document.createElement('br');
+      const breakSpace2 = document.createElement('br');
+      const deleteHTML = document.createElement('p');
+      deleteHTML.innerHTML = deleteMessage;
+      li.appendChild(breakSpace1);
+      li.appendChild(breakSpace2);
+      li.appendChild(deleteHTML);
+    });
+    li.appendChild(deleteButton);
+  }
+
   return li;
+}
+
+deleteReview = (reviewID) => {
+  fetch(`http://localhost:1337/reviews/${reviewID}`,{
+	      method:'DELETE'
+  }).then(response => {
+    console.log('###########################################')
+	  console.log(response);
+  });
 }
 
 /**
