@@ -37,7 +37,7 @@ for (let i=1; i<=10; i++){
  *   in the cache and returning a new response with a string if an error is 
  *   thrown.
  */
-let currentCache = 'myCacheNow123';
+let currentCache = 'myCacheNow';
 
 self.addEventListener("install", inst => {
     //Install predetermined caches before full install
@@ -86,10 +86,10 @@ self.addEventListener("fetch", fetEv => {
             let reqURL = fetEv.request.url;
         
             return fetch(fetEv.request).then( fetResponse =>{
-
-                //cache responses that are not related to google maps, or the restaurants and reviews database
-                if (!(reqURL.includes("maps") || reqURL.includes("googleapis") || reqURL.includes("restaurants") || reqURL.includes("reviews"))){
-
+                console.log(reqURL);
+                //cache responses that are not related to google maps, fonts, or the restaurants and reviews database
+                if (!(reqURL.includes("maps") || reqURL.includes("font") || reqURL.includes("restaurants") || reqURL.includes("reviews"))){
+                    console.log('CLONED!!!!!!!!!!!!!');
                     //clone the response to not consume it when caching
                     let fetResClone = fetResponse.clone();
             

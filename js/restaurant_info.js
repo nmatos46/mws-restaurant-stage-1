@@ -220,7 +220,7 @@ submitReview = () => {
   const offlineReview = ul.appendChild(createReviewHTML(review));
   const offlineMessage = document.createElement('p');
   offlineMessage.setAttribute('id','offline-review');
-  offlineMessage.innerHTML = 'Offline';
+  offlineMessage.innerHTML = 'Refresh the page before using the delete button.';
   const breakSpace1 = document.createElement('br');
   const breakSpace2 = document.createElement('br');
   offlineReview.appendChild(breakSpace1);
