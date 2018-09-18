@@ -313,14 +313,22 @@ createReviewHTML = (review) => {
     let deleteMessage = '';
     deleteButton.addEventListener('click',()=>{
       if(!window.navigator.onLine){
-        deleteIDBReview(review.id);
+        //if new review has been stored from the server
+        if(review.id!==404){
+          deleteIDBReview(review.id);
+        }else{
+          deleteIDBReview(404);
+        }
+        
         window.addEventListener('online',event => {
           deleteReview(review.id);  
         });
         deleteMessage = 'Review to be deleted in the server once back online. In the meantime, refresh the page, then come back...'
         
       }else{
+        //if new review has been stored from the server
         deleteIDBReview(review.id);
+        deleteIDBReview(404)
         deleteReview(review.id);
         deleteMessage = 'Comment completely deleted. Refresh the page then come back :)';
       }

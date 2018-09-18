@@ -213,10 +213,20 @@ createRestaurantHTML = (restaurant) => {
   fav.className = 'mainFav';
   let unfavor = '♥';
   let favor = '♡';
-  if (restaurant.is_favorite==true){
+
+  //change initial fav string to boolean
+  if(restaurant.is_favorite=='true'){
+    DBHelper.changeFavState(restaurant,true);
+    restaurant.is_favorite=true;
+  }else if (restaurant.is_favorite=='false'){
+    DBHelper.changeFavState(restaurant,false);
+    restaurant.is_favorite=false;
+  }
+
+  if (restaurant.is_favorite===true){
     fav.innerHTML = unfavor;
     fav.setAttribute('aria-label',`Unfavorite ${restaurant.name} button`);
-  }else if (restaurant.is_favorite==false){
+  }else if (restaurant.is_favorite===false){
     fav.innerHTML = favor;
     fav.setAttribute('aria-label',`Favorite ${restaurant.name} button`);
   }

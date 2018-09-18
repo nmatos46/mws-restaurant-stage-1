@@ -33,7 +33,7 @@ class DBHelper {
     let reviews = [];
     //get reviews from idb if you can
     if(window.navigator.onLine){
-      return this.fetchRestaurantsFromServer(restaurantID,callback);
+      return this.fetchReviewsFromServer(restaurantID,callback);
     }else{
       let reviewsDBPromise = idb.open('reviewsDB').then( updateDB => {
         let reviewsTX = updateDB.transaction('reviews');
@@ -66,7 +66,7 @@ class DBHelper {
    * @param {int} restaurantID 
    * @param {function} callback 
    */
-  static fetchRestaurantsFromServer(restaurantID,callback){
+  static fetchReviewsFromServer(restaurantID,callback){
     fetch(`http://localhost:1337/reviews/?restaurant_id=${restaurantID}`)
     .then(promiseResponse => {
       return this.returnError(promiseResponse,callback);
@@ -154,7 +154,7 @@ class DBHelper {
     /** 
     //Update idb data with data from the server
     let reviewsIDB = {};
-    this.fetchRestaurantsFromServer(review.restaurant_id,(error,reviews) => {
+    this.fetchReviewsFromServer(review.restaurant_id,(error,reviews) => {
       if (!reviews){
         //if there are no reviews
         console.log(`Error fetching Restaurant Reviews: ${error}`);
