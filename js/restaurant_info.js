@@ -83,6 +83,16 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   let favor = `Favorite ${restaurant.name}`;
   //let unfavor = '♥';
   //let favor = '♡';
+
+  //change initial fav string to boolean
+  if(restaurant.is_favorite=='true'){
+    DBHelper.changeFavState(restaurant,true);
+    restaurant.is_favorite=true;
+  }else if (restaurant.is_favorite=='false'){
+    DBHelper.changeFavState(restaurant,false);
+    restaurant.is_favorite=false;
+  }
+
   if (restaurant.is_favorite==true){
     fav.innerHTML=unfavor;
   }else if (restaurant.is_favorite==false){

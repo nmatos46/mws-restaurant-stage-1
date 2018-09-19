@@ -4,7 +4,6 @@
  */
 let cacheAlways = [
     './',
-    './manifest.json',
     './index.html',
     './restaurant.html',
     './js/altTxt.js',
@@ -88,7 +87,7 @@ self.addEventListener("fetch", fetEv => {
             return fetch(fetEv.request).then( fetResponse =>{
                 console.log(reqURL);
                 //cache responses that are not related to google maps, fonts, or the restaurants and reviews database
-                if (!(reqURL.includes("maps") || reqURL.includes("font") || reqURL.includes("restaurants") || reqURL.includes("reviews"))){
+                if (!(reqURL.includes("maps") || reqURL.includes("googleapis") || reqURL.includes("restaurants") || reqURL.includes("reviews") || reqURL.includes("RRlogo")||reqURL.includes("manifest"))){
                     console.log('CLONED!!!!!!!!!!!!!');
                     //clone the response to not consume it when caching
                     let fetResClone = fetResponse.clone();

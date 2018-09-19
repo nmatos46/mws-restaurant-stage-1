@@ -4,11 +4,11 @@
     "start_url": "./",
     "icons": [
     {
-        "src": "./img/RRlogo192.png",
+        "src": "./RRlogo192.png",
         "type": "image/png",
         "sizes": "192x192"
     },{
-        "src": "./img/RRlogo512.png",
+        "src": "./RRlogo512.png",
         "type": "image/png",
         "sizes": "512x512"
     }],
