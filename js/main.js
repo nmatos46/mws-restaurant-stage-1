@@ -143,7 +143,7 @@ resetRestaurants = (restaurants) => {
   
     //define Map markers
   let markers = "&markers=size:mid";
-  markers += "|color:red"; //Or try color:0x483d8b
+  markers += "|color:0x6a5db8"; //Or try color:0x483d8b
   //markers += "|label=R"; optional if design on marker is too plain
   restaurants.forEach(restaurant => {
     markers += `|${restaurant.latlng.lat},${restaurant.latlng.lng}`;
@@ -154,7 +154,7 @@ resetRestaurants = (restaurants) => {
   mapSrc += "&key=AIzaSyCvSApnzzO8lNHBERgBOtGGRfm3POUo0Es"
 
     //render static map in html
-  document.getElementById("static-map").src = mapSrc;
+  document.getElementById("main-static-map").src = mapSrc;
 
 
 

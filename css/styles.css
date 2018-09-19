@@ -16,18 +16,6 @@ body {
   margin-top: 0;
 }
 
-#static-map {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-@media screen and (max-width:658px){
-  #static-map{
-    width: 100%;
-  }
-}
-
 ul, li {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10pt;
@@ -149,10 +137,30 @@ nav h1 a {
     text-decoration: underline;
 }
 /* ====================== Map ====================== */
-#map {
+#main-map {
   width: 100%;
   background-color: #ccc;
 }
+
+#main-static-map {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+@media screen and (max-width:658px){
+  #main-static-map{
+    width: 100%;
+  }
+}
+
+#info-static-map{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width:100%;
+}
+
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   width: 100%;

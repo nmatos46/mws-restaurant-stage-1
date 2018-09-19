@@ -127,6 +127,33 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
 
+  //create the static map
+  let mapSrc="https://maps.googleapis.com/maps/api/staticmap?";
+  let center = `center=${restaurant.latlng.lat},${restaurant.latlng.lng}`;
+  let zoom = "&zoom=16";
+  let size = "&size=500x300" 
+
+  mapSrc += center;
+  mapSrc += zoom;
+  mapSrc += size;
+
+
+    //define Map marker
+  let marker = "&markers=size:mid";
+  marker += "|color:0x6a5db8";
+  //marker += "|label=R"; optional if design on marker is too plain
+  marker += `|${restaurant.latlng.lat},${restaurant.latlng.lng}`;
+
+  mapSrc += marker;
+
+    //define api key
+  mapSrc += "&key=AIzaSyCvSApnzzO8lNHBERgBOtGGRfm3POUo0Es"
+
+    //render static map in html
+  document.getElementById("info-static-map").src = mapSrc;
+
+
+  //get reviews and create their html
   DBHelper.fetchRestaurantReviews(restaurant.id,(error,reviews)=>{
     if (!reviews){
       //if there are no reviews
@@ -140,14 +167,15 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   })
   
   
-  //configure the google map  
+  //configure the google map
+  /**  
   if (self.map){
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     console.log(self.map);
     if (self.map.tagName==="DIV"){
       fillBreadcrumb();
     }
-    
+    console.log(self.map);
     self.map.setOptions({
       zoom: 16,
       center: restaurant.latlng,
@@ -157,9 +185,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     .catch(error => {
       console.log(`${error.name}: ${error.message}`);
     });
-    */
+    
     DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
   }
+  */
   
   
 }
