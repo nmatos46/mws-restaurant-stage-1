@@ -129,6 +129,37 @@ resetRestaurants = (restaurants) => {
   self.markers.forEach(m => m.setMap(null));
   self.markers = [];
   self.restaurants = restaurants;
+
+  //define and render google maps static image
+  let mapSrc="https://maps.googleapis.com/maps/api/staticmap?";
+  let center = "center=40.722216,-73.987501";
+  //let zoom = "&zoom=12";
+  let size = "&size=700x400" 
+
+  mapSrc += center;
+  //mapSrc += zoom; optional if zoom isn't good enough when rendered
+  mapSrc += size;
+
+  
+    //define Map markers
+  let markers = "&markers=size:mid";
+  markers += "|color:red"; //Or try color:0x483d8b
+  //markers += "|label=R"; optional if design on marker is too plain
+  restaurants.forEach(restaurant => {
+    markers += `|${restaurant.latlng.lat},${restaurant.latlng.lng}`;
+  });
+  mapSrc += markers;
+  
+    //define api key
+  mapSrc += "&key=AIzaSyCvSApnzzO8lNHBERgBOtGGRfm3POUo0Es"
+
+    //render static map in html
+  document.getElementById("static-map").src = mapSrc;
+
+
+
+
+
 }
 
 /**
@@ -223,6 +254,7 @@ createRestaurantHTML = (restaurant) => {
     restaurant.is_favorite=false;
   }
 
+  //Set html of fav button
   if (restaurant.is_favorite===true){
     fav.innerHTML = unfavor;
     fav.setAttribute('aria-label',`Unfavorite ${restaurant.name} button`);
