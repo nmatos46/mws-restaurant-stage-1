@@ -12,7 +12,7 @@ class DBHelper {
     const port = 9000 // Change this to your server port
     return `http://localhost:${port}/data/restaurants.json`;
     */
-    return `http://localhost:1337/restaurants`;
+    return `https://udacity-reviews-server-ncm.herokuapp.com/restaurants`;
   }
 
   /**Citation: Handling failed http responses

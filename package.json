@@ -1,0 +1,22 @@
+{
+  "name": "reviews-client-ncm",
+  "version": "0.1.0",
+  "description": "Simple http server for restaurant reviews client",
+  "main": "./js/main.js",
+  "scripts": {
+    "test": "review"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmatos46/mws-restaurant-stage-1.git"
+  },
+  "keywords": [
+    "udacity"
+  ],
+  "author": "Norman Matos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmatos46/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/nmatos46/mws-restaurant-stage-1#readme"
+}
