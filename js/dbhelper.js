@@ -67,7 +67,7 @@ class DBHelper {
    * @param {function} callback 
    */
   static fetchReviewsFromServer(restaurantID,callback){
-    fetch(`http://localhost:1337/reviews/?restaurant_id=${restaurantID}`)
+    fetch(`https://udacity-reviews-server-ncm.herokuapp.com/reviews/?restaurant_id=${restaurantID}`)
     .then(promiseResponse => {
       return this.returnError(promiseResponse,callback);
     })
@@ -118,7 +118,7 @@ class DBHelper {
    * @param {Boolean} newFavState 
    */
   static changeServedFavState(restaurantID,newFavState){
-    fetch(`http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${newFavState}`,{
+    fetch(`https://udacity-reviews-server-ncm.herokuapp.com/restaurants/${restaurantID}/?is_favorite=${newFavState}`,{
       method: 'PUT'
     });
   }
@@ -134,7 +134,7 @@ class DBHelper {
     }
     console.log(JSON.stringify(reviewPost));
 
-    let requestURL = 'http://localhost:1337/reviews/';
+    let requestURL = 'https://udacity-reviews-server-ncm.herokuapp.com/reviews/';
     
     //Update server data
     fetch(requestURL,{
