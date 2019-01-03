@@ -395,7 +395,7 @@ deleteIDBReview = (reviewID) => {
 }
 
 deleteReview = (reviewID) => {
-  fetch(`http://localhost:1337/reviews/${reviewID}`,{
+  fetch(`https://udacity-reviews-server-ncm.herokuapp.com/reviews/${reviewID}`,{
 	      method:'DELETE'
   }).then(response => {
     console.log('###########################################')
