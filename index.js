@@ -6,6 +6,8 @@ var file = new static.Server();
 
 require('http').createServer(function(request, response) {
   request.addListener('end', function() {
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    console.log(request.url)
     file.serve(request, response);
   }).resume();
 }).listen(process.env.PORT || 9000);
