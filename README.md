@@ -1,8 +1,23 @@
-# Mobile Web Specialist Certification Course
+# Mobile Web Specialist Certification Course Project
 ---
 #### _Three Stage Course Material Project - Restaurant Reviews_
+A demo of the client of this application can be found at the following url:
+https://udacity-reviews-client-ncm.herokuapp.com/
 
+A demo of the server of this application can be found at the following url:
+https://udacity-reviews-server-ncm.herokuapp.com/restaurants
 
+For the respective repositories in git, see the following links:
+(Client) https://github.com/nmatos46/mws-restaurant-stage-1
+(Server) https://github.com/nmatos46/mws-restaurant-stage-3
+
+Note that this application requires the following installations:
+- Node.js: https://nodejs.org/en/download/
+- Node Package Manager (npm): https://www.npmjs.com/get-npm
+- Express.js (Once npm is installed, run the command 'npm install --save express')
+
+If this repository is cloned from git, it can be run locally with npm using the following command in your terminal:
+'npm start'
 
 ****************************Original Udacity Readme***********************************
 ## Udacity Project Overview: Stage 1
