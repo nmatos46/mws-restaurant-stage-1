@@ -2,14 +2,14 @@
 ---
 #### _Three Stage Course Material Project - Restaurant Reviews_
 A demo of the client of this application can be found at the following url:
-https://udacity-reviews-client-ncm.herokuapp.com/
+- https://udacity-reviews-client-ncm.herokuapp.com/
 
 A demo of the server of this application can be found at the following url:
-https://udacity-reviews-server-ncm.herokuapp.com/restaurants
+- https://udacity-reviews-server-ncm.herokuapp.com/restaurants
 
 For the respective repositories in git, see the following links:
-(Client) https://github.com/nmatos46/mws-restaurant-stage-1
-(Server) https://github.com/nmatos46/mws-restaurant-stage-3
+- (Client) https://github.com/nmatos46/mws-restaurant-stage-1
+- (Server) https://github.com/nmatos46/mws-restaurant-stage-3
 
 Note that this application requires the following installations:
 - Node.js: https://nodejs.org/en/download/
@@ -19,7 +19,8 @@ Note that this application requires the following installations:
 If this repository is cloned from git, it can be run locally with npm using the following command in your terminal:
 'npm start'
 
-****************************Original Udacity Readme***********************************
+#Original Udacity Readme~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---
 ## Udacity Project Overview: Stage 1
 
 For the **Restaurant Reviews** projects, you will incrementally convert a static webpage to a mobile-ready web application. In **Stage One**, you will take a static design that lacks accessibility and convert the design to be responsive on different sized displays and accessible for screen reader use. You will also add a service worker to begin the process of creating a seamless offline experience for your users.
