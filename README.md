@@ -19,7 +19,7 @@ Note that this application requires the following installations:
 If this repository is cloned from git, it can be run locally with npm using the following command in your terminal:
 'npm start'
 
-#Original Udacity Readme~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#Original Udacity Readme ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ---
 ## Udacity Project Overview: Stage 1
 
