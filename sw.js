@@ -11,7 +11,8 @@ let cacheAlways = [
     './js/main.js',
     './js/restaurant_info.js',
     './js/dbhelper.js',
-    './js/idb.js'
+    './js/idb.js',
+    './manifest.json'
 ];
 /**End of "Citations: Service Worker Code 1,
  *                    Heading "Install a service worker""
